@@ -8,8 +8,8 @@ RUN mkdir -p /home/app
 COPY node /home/node
 RUN chown -R node:node /home
 
+RUN (cd /home/node && npm i superstatic)
 USER node
-RUN npm i -g superstatic
 WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
 
