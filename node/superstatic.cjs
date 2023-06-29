@@ -7,7 +7,7 @@ const env = JSON.stringify(
   Object.fromEntries(
     Object.entries(process.env)
       .filter(([key]) => key.startsWith("APP_"))
-      .map(([key, value]) => [key.replace("APP_"), value])
+      .map(([key, value]) => [key.replace("APP_", ""), value])
   )
 );
 
