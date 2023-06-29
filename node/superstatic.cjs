@@ -1,4 +1,4 @@
-const superstatic = require("superstatic");
+const superstatic = require("superstatic").default;
 const connect = require("connect");
 const staticsJson = require("path").join(process.cwd(), "superstatic.json");
 const options = require(staticsJson);
