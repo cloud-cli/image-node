@@ -49,16 +49,8 @@ function getCommand() {
 
   if (FS.existsSync(staticsJson)) {
     return {
-      command: "superstatic",
-      args: [
-        ".",
-        "--port",
-        process.env.PORT || "8080",
-        "--host",
-        "0.0.0.0",
-        "--debug",
-        "true",
-      ],
+      command: "node",
+      args: ["/home/node/superstatic.cjs"],
     };
   }
 
