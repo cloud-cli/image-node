@@ -5,7 +5,9 @@ const options = require(staticsJson);
 
 const env = JSON.stringify(
   Object.fromEntries(
-    Object.entries(process.env).filter(([key]) => key.startsWith("APP_"))
+    Object.entries(process.env)
+      .filter(([key]) => key.startsWith("APP_"))
+      .map(([key, value]) => [key.replace("APP_"), value])
   )
 );
 
@@ -15,4 +17,6 @@ connect()
     res.end(env);
   })
   .use(superstatic(options))
-  .listen(process.env.PORT);
+  .listen(process.env.PORT, function () {
+    console.log("Server started at " + process.env.PORT);
+  });
