@@ -6,10 +6,10 @@ RUN git config --global --add safe.directory /home/app
 ENV HOME=/home/node
 RUN mkdir -p /home/app
 COPY node /home/node
-RUN chown -R node:node /home
+RUN chown -R 1000:1000 /home
 
 RUN (cd /home/node && npm i superstatic)
-USER node
+USER 1000
 WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
 
