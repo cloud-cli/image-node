@@ -1,7 +1,9 @@
 const superstatic = require("superstatic").default;
 const connect = require("connect");
 const staticsJson = require("path").join(process.cwd(), "superstatic.json");
+const packageJson = require("path").join(process.cwd(), "package.json");
 const options = require(staticsJson);
+const pkg = require(staticsJson);
 
 const env = JSON.stringify(
   Object.fromEntries(
@@ -11,12 +13,16 @@ const env = JSON.stringify(
   )
 );
 
-connect()
-  .use("/.env", function (_, res) {
-    res.writeHead(200, { "content-type": "application/json" });
-    res.end(env);
-  })
-  .use(superstatic(options))
-  .listen(process.env.PORT, function () {
-    console.log("Server started at " + process.env.PORT);
-  });
+const server = connect();
+
+server.use("/.env", function (_, res) {
+  res.writeHead(200, { "content-type": "application/json" });
+  res.end(env);
+});
+
+if (pkg.main) {
+  server.use(require(pkg.main));
+}
+
+server.use(superstatic(options));
+server.listen(process.env.PORT, () => console.log("Server started at " + process.env.PORT));
