@@ -3,7 +3,7 @@ const connect = require("connect");
 const staticsJson = require("path").join(process.cwd(), "superstatic.json");
 const packageJson = require("path").join(process.cwd(), "package.json");
 const options = require(staticsJson);
-const pkg = require(staticsJson);
+const pkg = require(packageJson);
 
 const env = JSON.stringify(
   Object.fromEntries(
