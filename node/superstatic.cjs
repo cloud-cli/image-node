@@ -21,7 +21,8 @@ server.use("/.env", function (_, res) {
 });
 
 if (pkg.main) {
-  server.use(require(pkg.main));
+  const main = require('path').join(process.cwd(), pkg.main);
+  server.use(require(main));
 }
 
 server.use(superstatic(options));
