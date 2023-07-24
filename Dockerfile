@@ -7,11 +7,11 @@ ENV HOME=/home/node
 RUN mkdir -p /home/app
 COPY node /home/node
 RUN chown -R 1000:1000 /home
-
-RUN (cd /home/node && npm i superstatic)
 USER 1000
+
+RUN cd /home/node && npm i superstatic
+
 WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
 
 ENV PATH "$PATH:/home/node/npm/bin:/home/app/node_modules/.bin"
-ENV PORT 8080
