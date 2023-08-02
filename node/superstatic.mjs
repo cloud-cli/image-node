@@ -1,8 +1,9 @@
-import { default as superstatic } from "superstatic";
+import statics from "superstatic";
 import connect from "connect";
 import { join } from "node:path";
 import { existsSync, readFileSync } from "node:fs";
 
+const superstatic = statics.default;
 const loadJson = (path) => existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : {};
 const options = loadJson(join(process.cwd(), "superstatic.json"));
 const pkg = loadJson(join(process.cwd(), "package.json"));
