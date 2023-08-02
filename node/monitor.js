@@ -1,7 +1,8 @@
-const { spawn } = require("child_process");
-const FS = require("fs");
-const Path = require("path");
+import { spawn } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
+const restartInterval = Number(process.env.RESTART_INTERVAL || 2000);
 const options = {
   stdio: "pipe",
   cwd: process.cwd(),
@@ -20,11 +21,12 @@ function restart(code) {
   if (restarting) return;
 
   restarting = true;
+
   if (code) {
     console.log(`Process exited with code ${code}. Restarting`);
   }
 
-  setTimeout(start, process.env.RESTART_INTERVAL || 2000);
+  setTimeout(start, restartInterval);
 }
 
 function start() {
@@ -44,18 +46,18 @@ function start() {
 }
 
 function getCommand() {
-  const packageJson = Path.join(process.cwd(), "package.json");
-  const staticsJson = Path.join(process.cwd(), "superstatic.json");
+  const packageJson = join(process.cwd(), "package.json");
+  const staticsJson = join(process.cwd(), "superstatic.json");
 
-  if (FS.existsSync(staticsJson)) {
+  if (existsSync(staticsJson)) {
     return {
       command: "node",
-      args: ["/home/node/superstatic.cjs"],
+      args: ["/home/node/superstatic.mjs"],
     };
   }
 
-  if (FS.existsSync(packageJson)) {
-    const manifest = require(packageJson);
+  if (existsSync(packageJson)) {
+    const manifest = JSON.parse(readFileSync(packageJson, "utf8"));
     if (manifest.scripts && manifest.scripts.start) {
       return { command: "npm", args: ["start"] };
     }
@@ -65,9 +67,9 @@ function getCommand() {
     }
   }
 
-  const indexFiles = ["index.js", "index.mjs"];
+  const indexFiles = ["index.js", "index.mjs", "index.cjs"];
   for (const file of indexFiles) {
-    if (FS.existsSync(Path.join(process.cwd(), file))) {
+    if (existsSync(join(process.cwd(), file))) {
       return { command: "node", args: [file] };
     }
   }
