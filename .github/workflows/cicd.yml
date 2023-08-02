@@ -11,7 +11,7 @@ jobs:
 
     env:
       TAG: ghcr.io/cloud-cli/node:${{ github.sha }}
-      LATEST_TAG: 
+      LATEST_TAG: ghcr.io/cloud-cli/node:latest
 
     steps:
       - uses: actions/checkout@v3
