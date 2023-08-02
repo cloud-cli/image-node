@@ -1,1 +1,1 @@
-cd /home/app && node /home/node/monitor.js
+cd /home/app && node /home/node/monitor.mjs
