@@ -32,7 +32,8 @@ async function main() {
   if (pkg.main) {
     const main = join(process.cwd(), pkg.main);
     const md = await import(main);
-    server.use(md.default);
+    console.log('Using server from module:', md);
+    server.use(md.default || md);
   }
 
   server.use(superstatic(options));
