@@ -31,7 +31,8 @@ async function main() {
 
   if (pkg.main) {
     const main = join(process.cwd(), pkg.main);
-    server.use(await import(main));
+    const md = await import(main);
+    server.use(md.default);
   }
 
   server.use(superstatic(options));
