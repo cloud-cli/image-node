@@ -15,4 +15,4 @@ WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
 
 ENV PATH "$PATH:/home/node/npm/bin:/home/app/node_modules/.bin"
-ENV NODE_OPTIONS="--experimental-network-imports"
+ENV NODE_OPTIONS="--experimental-network-imports --no-warnings"
