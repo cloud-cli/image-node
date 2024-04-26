@@ -1,7 +1,7 @@
 cd /home/app
 
 [[ -f superstatic.json ]] && node /home/node/superstatic.mjs
-[[ -f Procfile ]] && nf start
+[[ -f Procfile ]] && npx --yes foreman start --port $PORT
 [[ -f index.js ]] && node index.js
 [[ -f index.mjs ]] && node index.mjs
 [[ -f index.cjs ]] && node index.cjs

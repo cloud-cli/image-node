@@ -10,7 +10,8 @@ RUN mkdir -p /home/app
 COPY node /home/node
 RUN chown -R 1000:1000 /home
 USER 1000
-RUN cd /home/node && npm i --no-audit superstatic foreman
+RUN npm update -g npm
+RUN cd /home/node && npm i --no-audit superstatic
 WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
 
