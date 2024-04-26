@@ -4,7 +4,7 @@ This is a [Node.js](https://nodejs.org/) base image for [Cloudy](https://github.
 
 ## Usage
 
-Create a Dockerfile 
+Create a Dockerfile
 
 ```Dockerfile
 FROM ghcr.io/cloud-cli/node
@@ -28,5 +28,8 @@ Add an entry to `package.json` with the `main` field pointing to the app's entry
 
 ### Zero-config
 
-Having a `index.js` present is enough to start the app
+Having a `index.js` present is enough to start the app. Also works with `index.cjs` and `index.mjs`
 
+## Procfile
+
+If a `Procfile` is present, [foreman](https://github.com/strongloop/node-foreman) is used to start the processes.
