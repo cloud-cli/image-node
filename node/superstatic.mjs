@@ -4,7 +4,8 @@ import { join } from "node:path";
 import { existsSync, readFileSync } from "node:fs";
 
 const superstatic = statics.default;
-const loadJson = (path) => existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : {};
+const loadJson = (path) =>
+  existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : {};
 const options = loadJson(join(process.cwd(), "superstatic.json"));
 const pkg = loadJson(join(process.cwd(), "package.json"));
 
@@ -31,9 +32,14 @@ async function main() {
 
   if (pkg.main) {
     const main = join(process.cwd(), pkg.main);
-    const md = await import(main);
-    console.log('Using server from module:', md);
-    server.use(md.default || md);
+
+    if (existsSync(main)) {
+      const md = await import(main);
+      console.log("Using server from module:", md);
+      server.use(md.default || md);
+    } else {
+      console.error("Entrypoint at " + main + " not found!");
+    }
   }
 
   server.use(superstatic(options));
