@@ -10,7 +10,7 @@ if [[ -f package.json ]]; then
   main=$(node -p -e 'require("./package.json").main||""')
   start=$(node -p -e 'require("./package.json").scripts?.start||""')
   [[ -z "$main" ]] || node $main
-  [[ -z "$start" ]] || npm $start
+  [[ -z "$start" ]] || npm start
 fi
 
 echo "No entrypoint to execute. Exiting."
