@@ -2,6 +2,8 @@ cd /home/app
 
 set -e
 
+[[ ! -z "$START_COMMAND" ]] && $($START_COMMAND
+
 [[ -f superstatic.json ]] && node /home/node/superstatic.mjs
 [[ -f Procfile ]] && npx --yes foreman start --port $PORT
 [[ -f index.js ]] && node index.js
@@ -16,5 +18,12 @@ if [[ -f package.json ]]; then
   [[ ! -z "$start" ]] && npm start
 fi
 
-echo "No entrypoint to execute. Exiting."
+error_code=$?
+
+if [[ ! "$error_code" == "0" ]]; then
+  echo "Command failed with code $error_code";
+else
+  echo "No entrypoint to execute. Exiting.";
+fi
+
 exit 1
