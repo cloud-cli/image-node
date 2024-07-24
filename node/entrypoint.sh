@@ -2,7 +2,7 @@ cd /home/app
 
 set -e
 
-[[ ! -z "$START_COMMAND" ]] && $($START_COMMAND
+[[ ! -z "$START_COMMAND" ]] && $START_COMMAND
 
 [[ -f superstatic.json ]] && node /home/node/superstatic.mjs
 [[ -f Procfile ]] && npx --yes foreman start --port $PORT
