@@ -1,4 +1,4 @@
-FROM docker.io/node:20-alpine
+FROM docker.io/node:lts-alpine
 
 LABEL org.opencontainers.image.source="https://github.com/cloud-cli/image-node"
 
