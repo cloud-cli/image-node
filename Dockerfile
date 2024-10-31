@@ -18,4 +18,4 @@ WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
 
 ENV PATH="$PATH:/home/node/npm/bin:/home/app/node_modules/.bin"
-ENV NODE_OPTIONS="--no-warnings --import /home/node/hooks.mjs"
+ENV NODE_OPTIONS="--no-warnings --import file:///home/node/hooks.mjs"
