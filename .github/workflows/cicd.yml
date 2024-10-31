@@ -41,4 +41,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
+          cache: false
           tags: ${{ env.LATEST_TAG }}
