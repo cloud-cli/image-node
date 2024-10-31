@@ -33,3 +33,7 @@ Having a `index.js` present is enough to start the app. Also works with `index.c
 ## Procfile
 
 If a `Procfile` is present, [foreman](https://github.com/strongloop/node-foreman) is used to start the processes.
+
+## Import maps
+
+If `import-map.json` is defined in the app root folder, the same logic as [Import Maps](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) is used to load modules.
