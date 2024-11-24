@@ -11,7 +11,7 @@ COPY node /home/node
 RUN mkdir -p /home/app
 RUN chown -R 1000:1000 /home && chmod -R a+r /home
 RUN npm update -g npm
-RUN cd /home/node && npm i --no-audit superstatic
+RUN cd /home/node && npm i --no-audit --no-fund superstatic@latest
 
 USER 1000
 WORKDIR /home/app

@@ -20,7 +20,7 @@ const env = JSON.stringify(
 async function main() {
   const server = connect();
 
-  server.use((req, res, next) => {
+  server.use((req, _res, next) => {
     console.log(`[${new Date().toISOString()}]`, req.method, req.url);
     next();
   });
