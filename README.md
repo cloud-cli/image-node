@@ -1,6 +1,6 @@
 # Node.js image
 
-This is a [Node.js](https://nodejs.org/) base image for [Cloudy](https://github.com/cloud-cli)
+This is a [Node.js](https://nodejs.org/) base image for [Cloudy](https://github.com/cloud-cli), based on the latest LTS version of node, running on Alpine Linux.
 
 ## Usage
 
