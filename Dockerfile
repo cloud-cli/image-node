@@ -12,7 +12,7 @@ RUN mkdir -p /home/app
 RUN chown -R 1000:1000 /home && chmod -R a+r /home
 RUN npm i -g npm@latest pnpm@latest
 RUN cd /home/node && npm i --no-audit --no-fund superstatic@latest
-
+RUN chown -R 1000:1000 /home/node/.npm
 USER 1000
 WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
