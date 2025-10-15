@@ -2,6 +2,8 @@ cd /home/app
 
 set -e
 
+[[ -f "package.json" ]] && [[ ! -d "node_modules" ]] &&  echo "Installing modules" && pnpm config set minimumReleaseAge 1440 && pnpm i
+
 [[ ! -z "$START_COMMAND" ]] && $START_COMMAND && exit 0
 
 [[ -f superstatic.json ]] && node /home/node/superstatic.mjs && exit 0
