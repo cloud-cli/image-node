@@ -7,7 +7,7 @@ set -e
 [[ ! -z "$START_COMMAND" ]] && $START_COMMAND && exit 0
 
 [[ -f superstatic.json ]] && node /home/node/superstatic.mjs && exit 0
-[[ -f Procfile ]] && npx --yes foreman start --port $PORT && exit 0
+[[ -f Procfile ]] && pnpm dlx --yes foreman start --port $PORT && exit 0
 [[ -f index.js ]] && node index.js && exit 0
 [[ -f index.mjs ]] && node index.mjs && exit 0
 [[ -f index.cjs ]] && node index.cjs && exit 0
