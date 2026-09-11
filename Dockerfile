@@ -11,7 +11,7 @@ COPY node /home/node
 RUN mkdir -p /home/app && \
   chown -R 1000:1000 /home && \
   chmod -R a+r /home && \
-  npm i -g npm@latest foreman@latest && \
+  npm i -g npm@latest pnpm@12 foreman@latest && \
 
   cd /home/node && \
   npm i --no-audit --no-fund superstatic@latest && \
