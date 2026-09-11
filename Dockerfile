@@ -10,7 +10,6 @@ ENV PATH "$PATH:/home/node/npm/bin:/home/app/node_modules/.bin:/root/.local/shar
 ENV HOME=/home/node
 
 COPY node /home/node
-
 RUN mkdir -p /home/app && \
   chown -R 1000:1000 /home && \
   chmod -R a+r /home && \
@@ -18,9 +17,9 @@ RUN mkdir -p /home/app && \
   cd /home/node && \
   chown -R 1000:1000 /home/node/.npm
 
-RUN pnpm self-update && pnpm i -g foreman superstatic
-
 USER 1000
+RUN pnpm self-update && pnpm store prune
+
 WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]
 ENV NODE_OPTIONS="--no-warnings --import file:///home/node/hooks.mjs"
