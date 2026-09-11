@@ -11,7 +11,7 @@ COPY node /home/node
 RUN mkdir -p /home/app && \
   chown -R 1000:1000 /home && \
   chmod -R a+r /home && \
-  npm install --no-audit --no-fund -g --allow-scripts=pnpm npm@latest foreman@latest superstatic@latest && \
+  npm install --no-audit --no-fund -g --allow-scripts=pnpm,re2 npm@latest foreman@latest superstatic@latest && \
   cd /home/node && \
   chown -R 1000:1000 /home/node/.npm
 
