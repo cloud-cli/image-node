@@ -12,8 +12,7 @@ RUN mkdir -p /home/app && \
   chown -R 1000:1000 /home && \
   chmod -R a+r /home && \
   npm i -g npm@latest foreman@latest && \
-  corepack enable && \
-  corepack prepare pnpm@latest --activate && \
+
   cd /home/node && \
   npm i --no-audit --no-fund superstatic@latest && \
   chown -R 1000:1000 /home/node/.npm
