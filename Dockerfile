@@ -18,6 +18,8 @@ RUN mkdir -p /home/app && \
   npm i --no-audit --no-fund superstatic@latest && \
   chown -R 1000:1000 /home/node/.npm
 
+RUN pnpm i -g pnpm
+
 USER 1000
 WORKDIR /home/app
 ENTRYPOINT ["/bin/bash", "/home/node/entrypoint.sh"]

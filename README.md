@@ -7,7 +7,7 @@ This is a [Node.js](https://nodejs.org/) base image for [Cloudy](https://github.
 Create a Dockerfile
 
 ```Dockerfile
-FROM ghcr.io/cloud-cli/node
+FROM ghcr.io/cloud-cli/image-node:latest
 ADD . /home/app
 ```
 
