@@ -18,7 +18,7 @@ RUN mkdir -p /home/app && \
   npm i --no-audit --no-fund superstatic@latest && \
   chown -R 1000:1000 /home/node/.npm
 
-RUN pnpm i -g pnpm
+RUN pnpm self-update && pnpm i -g foreman superstatic
 
 USER 1000
 WORKDIR /home/app
