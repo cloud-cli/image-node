@@ -13,9 +13,10 @@ COPY node /home/node
 RUN mkdir -p /home/app && \
   chown -R 1000:1000 /home && \
   chmod -R a+r /home && \
-  npm install --no-audit --no-fund -g --allow-scripts=pnpm,re2 npm@latest foreman@latest superstatic@latest pnpm@12 && \
+  npm install --no-audit --no-fund -g --allow-scripts=pnpm,re2 npm@latest foreman@latest pnpm@12 && \
   cd /home/node && \
-  chown -R 1000:1000 /home/node/.npm
+  chown -R 1000:1000 /home/node/.npm && \
+  npm install --no-save superstatic@latest
 
 USER 1000
 RUN pnpm self-update && pnpm store prune
