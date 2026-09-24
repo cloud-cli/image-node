@@ -9,48 +9,53 @@ const importMap = !existsSync(pathToImportMap)
 const { imports } = importMap;
 const importKeys = Object.keys(imports);
 
-// import x from 'https://...'
-export function load(url, _context, nextLoad) {
+export async function load(url, context, nextLoad) {
   if (!url.startsWith("https://")) {
-    return nextLoad(url);
+    return nextLoad(url, context);
   }
 
-  return new Promise((resolve, reject) => resolveFromUrl(url, resolve, reject));
-}
-
-// import-map.json
-export async function resolve(specifier, context, nextResolve) {
-  if (importKeys.length) {
-    if (Object.hasOwn(imports, specifier)) {
-      return nextResolve(imports[specifier], context);
-    }
-
-    for (const next of importKeys) {
-      if (specifier.startsWith(next)) {
-        return nextResolve(specifier.replace(next, imports[next]));
-      }
-    }
-  }
-
-  return nextResolve(specifier, context);
-}
-
-async function resolveFromUrl(url, resolve, reject) {
   try {
     const req = await fetch(url);
 
     if (!req.ok) {
-      return reject(`${url}: ${req.statusText}`);
+      throw new Error(`${url}: ${req.statusText}`);
     }
 
     const data = await req.text();
 
-    resolve({
+    return {
       format: "module",
       shortCircuit: true,
       source: data,
-    });
+    };
   } catch (e) {
-    reject(e);
+    throw e;
   }
+}
+
+export async function resolve(specifier, context, nextResolve) {
+  let targetSpecifier = specifier;
+
+  // Handle import-map translation
+  if (importKeys.length) {
+    if (Object.hasOwn(imports, specifier)) {
+      targetSpecifier = imports[specifier];
+    } else {
+      for (const next of importKeys) {
+        if (specifier.startsWith(next)) {
+          targetSpecifier = specifier.replace(next, imports[next]);
+          break;
+        }
+      }
+    }
+  }
+
+  if (targetSpecifier.startsWith("https://")) {
+    return {
+      shortCircuit: true,
+      url: targetSpecifier,
+    };
+  }
+
+  return nextResolve(targetSpecifier, context);
 }
